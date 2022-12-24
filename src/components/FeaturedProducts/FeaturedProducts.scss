@@ -1,0 +1,26 @@
+.featureproducts {
+  margin: 100px 200px;
+
+  .top {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    align-items: center;
+
+    h2 {
+      flex: 2;
+      text-transform: capitalize;
+    }
+    p {
+      flex: 3;
+      color: grey;
+    }
+  }
+  .bottom {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+  }
+}
