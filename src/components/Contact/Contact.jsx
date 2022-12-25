@@ -29,10 +29,11 @@ export const Contact = () => {
           <Link className='link' to=''>
             <TwitterIcon />
           </Link>
+          W
           <YouTubeIcon />
           <Link className='link' to=''></Link>
           <InstagramIcon />
-          <Link className='link' to=''></Link>
+          <Link className='link' to=''></Link>W
           <LinkedInIcon />
           <Link className='link' to=''></Link>
         </div>

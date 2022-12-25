@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: 10px;
   transition: all ease 0.4s;
+  margin-bottom: 50px;
 
   .images {
     width: 100%;
@@ -56,10 +57,10 @@
     h3 {
       font-weight: 400;
       font-size: 1.3rem;
-     
     }
     .oldprice {
-      text-decoration: line-through; color: grey;
+      text-decoration: line-through;
+      color: grey;
     }
   }
 }
