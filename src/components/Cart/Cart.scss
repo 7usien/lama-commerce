@@ -1,0 +1,87 @@
+.cart {
+  position: absolute;
+  top: 80px;
+  right: 30px;
+  z-index: 8;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 1px 5px 8px rgba(0, 0, 0, 0.35);
+  max-height: 560px;
+  overflow-y: auto;
+
+  h1 {
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    margin: 1.5rem 0;
+    font-weight: 400;
+    color: #195de5;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    .details {
+      h2 {
+        font-size: 1.1rem;
+        font-weight: 400;
+      }
+      p {
+        color: gray;
+      }
+      .price {
+        color: #195de5;
+        font-weight: 600;
+      }
+    }
+
+    img {
+      width: 70px;
+    }
+    .delete {
+      color: red;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+  }
+
+  .total {
+    display: block;
+    text-align: center;
+    background-color: #195de5;
+    color: #fff;
+    padding: 1rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  button {
+    display: block;
+    background-color: orange;
+    padding: 1rem;
+    border: none;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  span.reset {
+    color: red;
+    text-transform: capitalize;
+    border: 1px solid red;
+    width: fit-content;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+}
