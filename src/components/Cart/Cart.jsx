@@ -32,8 +32,8 @@ export const Cart = () => {
     <div className='cart'>
       <h1>products in your cart</h1>
 
-      {data?.map((item) => (
-        <div className='item'>
+      {data?.map((item, idx) => (
+        <div className='item' key={idx}>
           <img src={item.img} alt='' />
           <div className='details'>
             <h2>{item.title}</h2>
