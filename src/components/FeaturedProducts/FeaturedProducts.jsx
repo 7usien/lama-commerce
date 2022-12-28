@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-
+import React from 'react';
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 import './FeaturedProducts.scss';
-import Products from './../../pages/Products/Products';
 import { Card } from '../Card/Card';
-import axios from 'axios';
+import useFetch from './../../hooks/useFetch';
 export const FeaturedProducts = ({ type }) => {
   //   const data = [
   //     {
@@ -47,26 +46,9 @@ export const FeaturedProducts = ({ type }) => {
   //     },
   //   ];
 
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          process.env.REACT_PAPP_API_URL + '/products?populate=*',
-          {
-            headers: {
-              authorization: 'bearer ' + process.env.REACT_APP_API_TOKEN,
-            },
-          }
-        );
-        setData(res.data.data);
-      } catch (err) {
-        console.log(err.message);
-      }
-    };
-    fetchData();
-  }, []);
+  const { data, loading, error } = useFetch(
+    `/products?populate=*&[filters][type][$eq]=${type}`
+  );
 
   return (
     <div className='featureproducts'>
@@ -82,9 +64,16 @@ export const FeaturedProducts = ({ type }) => {
         </p>
       </div>
       <div className='bottom'>
-        {data?.map((item, idx) => (
-          <Card item={item} key={idx} />
-        ))}
+        {loading ? (
+          <div className='loading'>
+            <HourglassTopIcon />
+            loading wait ..
+          </div>
+        ) : error ? (
+          <div>error.message</div>
+        ) : (
+          data.map((item, idx) => <Card item={item} key={idx} />)
+        )}
       </div>
     </div>
   );

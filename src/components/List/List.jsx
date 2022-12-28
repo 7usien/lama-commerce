@@ -3,8 +3,6 @@ import { Card } from '../Card/Card';
 import './List.scss';
 
 const List = ({ catId, maxprice, sort }) => {
-  console.log(catId, maxprice, sort);
-
   const data = [
     {
       id: 1,
@@ -49,9 +47,9 @@ const List = ({ catId, maxprice, sort }) => {
 
   return (
     <div className='list'>
-      {data?.map((item) => (
+      {/* {data?.map((item) => (
         <Card item={item} key={item.id} />
-      ))}
+      ))} */}
     </div>
   );
 };

@@ -3,8 +3,9 @@ import React from 'react';
 import { useState } from 'react';
 import './Products.scss';
 
-import { createBrowserRouter, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import List from '../../components/List/List';
+import useFetch from './../../hooks/useFetch';
 const Products = () => {
   const params = useParams();
 
@@ -12,24 +13,20 @@ const Products = () => {
   const [maxPrice, setMaxPrice] = useState(1000);
   const [sortBy, setSortBy] = useState(null);
 
+  const { data, error, isloading } = useFetch(
+    `/subcategories?[filters][categories][id][$eq]=${catId}`
+  );
+  console.log(data);
   return (
     <div className='products'>
       <div className='left'>
         <div className='filterItem'>
-          <div className='inputItem'>
-            <input type='checkbox' id='1' vlue='1' />
-            <label htmlFor='1'>shoes</label>
-          </div>
-
-          <div className='inputItem'>
-            <input type='checkbox' id='2' vlue='2' />
-            <label htmlFor='2'>skirts</label>
-          </div>
-
-          <div className='inputItem'>
-            <input type='checkbox' id='3' vlue='3' />
-            <label htmlFor='3'>coats</label>
-          </div>
+          {data.map((item) => (
+            <div className='inputItem'>
+              <input type='checkbox' id={item.id} vlue={item.id} />
+              <label htmlFor={item.id}>{item.attributes.title}</label>
+            </div>
+          ))}
         </div>
         <div className='filterItem'>
           <h2>filter by price :</h2>

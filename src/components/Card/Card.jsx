@@ -8,7 +8,7 @@ export const Card = ({ item }) => {
     <Link className='link' to={`/product/${item.id}`}>
       <div className='card'>
         <div className='images'>
-          {item?.attributes.isNew && <span className='isNew'>new season</span>}
+          {item.attributes?.isNew && <span className='isNew'>new season</span>}
           <img
             src={
               process.env.REACT_APP_UPLOAD_URL +
@@ -18,8 +18,11 @@ export const Card = ({ item }) => {
             className='mainImg'
           />
           <img
-            src={item?.attributes.img2}
-            alt={item?.attributes.title}
+            src={
+              process.env.REACT_APP_UPLOAD_URL +
+              item.attributes?.img2.data.attributes.url
+            }
+            alt={item.attributes?.title}
             className='secondImg'
           />
         </div>
@@ -27,9 +30,9 @@ export const Card = ({ item }) => {
 
         <div className='prices'>
           <h3 className='oldprice'>
-            $ {item?.attributes.oldPrice || item?.attributes.price + 20}
+            $ {item.attributes?.oldPrice || item?.attributes.price + 20}
           </h3>
-          <h3>$ {item?.attributes.price} </h3>
+          <h3>$ {item.attributes?.price} </h3>
         </div>
       </div>
     </Link>
