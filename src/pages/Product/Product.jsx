@@ -9,14 +9,17 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 //Compo
 import './Product.scss';
+import useFetch from './../../hooks/useFetch';
+import { useParams } from 'react-router-dom';
 
 const Product = () => {
-  const [curretImg, setCurrentImg] = useState(0);
+  const id = useParams();
+  const productId = parseInt(id.id);
 
-  const images = [
-    'https://fns.modanisa.com/r/pro2/2022/07/18/z--8353391-1.jpg',
-    'https://fns.modanisa.com/r/pro2/2022/07/18/z--8353391-5.jpg',
-  ];
+  const [curretImg, setCurrentImg] = useState(0);
+  const { data, loading, error } = useFetch(
+    `/products/${productId}?populate=*`
+  );
 
   const [quantity, setQuantity] = useState(1);
 
@@ -25,14 +28,20 @@ const Product = () => {
       <div className='left'>
         <div className='images'>
           <img
-            src={images[0]}
+            src={
+              process.env.REACT_APP_UPLOAD_URL +
+              data?.attributes?.img?.data?.attributes?.url
+            }
             onClick={() => {
               setCurrentImg(0);
             }}
             alt=''
           />
           <img
-            src={images[1]}
+            src={
+              process.env.REACT_APP_UPLOAD_URL +
+              data?.attributes?.img2?.data?.attributes?.url
+            }
             onClick={() => {
               setCurrentImg(1);
             }}
@@ -40,19 +49,22 @@ const Product = () => {
           />
         </div>
         <div className='mainImg'>
-          <img src={images[curretImg]} alt='' />
+          <img
+            src={
+              curretImg === 0
+                ? process.env.REACT_APP_UPLOAD_URL +
+                  data?.attributes?.img?.data?.attributes?.url
+                : process.env.REACT_APP_UPLOAD_URL +
+                  data?.attributes?.img2?.data?.attributes?.url
+            }
+            alt=''
+          />
         </div>
       </div>
       <div className='right'>
-        <h1>product title</h1>
-        <span className='price'>$ 19</span>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ex
-          facere aliquam, repellendus cumque aliquid ratione animi culpa illo
-          ipsum quaerat mollitia consequuntur obcaecati, natus fugit nostrum
-          asperiores repudiandae magnam. Vel iusto repellendus architecto modi
-          mollitia dignissimos magni ullam.
-        </p>
+        <h1>{data?.attributes?.title}</h1>
+        <span className='price'>$ {data?.attributes?.price}</span>
+        <p>{data?.attributes?.desc}</p>
 
         <div className='quantity'>
           <button
