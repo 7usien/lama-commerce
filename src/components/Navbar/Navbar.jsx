@@ -8,9 +8,21 @@ import { Link } from 'react-router-dom';
 
 import './Navbar.scss';
 import { Cart } from '../Cart/Cart';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const Navbar = () => {
   const [openCart, setOpenCart] = useState(false);
+
+  const products = useSelector((state) => state.cart.products);
+  const [quantityTotal, setQuantityTotal] = useState(0);
+
+  useEffect(() => {
+    let total = 0;
+    products?.map((item) => (total += item.quantity));
+
+    setQuantityTotal(total);
+  }, [products]);
 
   return (
     <div className='navbar'>
@@ -81,7 +93,7 @@ const Navbar = () => {
               }}
             >
               <ShoppingCartOutlinedIcon />
-              <span>0</span>
+              <span>{quantityTotal}</span>
             </div>
           </div>
         </div>

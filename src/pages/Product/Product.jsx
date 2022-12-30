@@ -11,6 +11,8 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import './Product.scss';
 import useFetch from './../../hooks/useFetch';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/cartSlice';
 
 const Product = () => {
   const id = useParams();
@@ -22,6 +24,8 @@ const Product = () => {
   );
 
   const [quantity, setQuantity] = useState(1);
+
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -81,13 +85,24 @@ const Product = () => {
                 -
               </button>
               <span>{quantity}</span>
-              <button onClick={() => setQuantity((prev) => prev + 1)}>
-                {' '}
-                +{' '}
-              </button>
+              <button onClick={() => setQuantity((prev) => prev + 1)}>+</button>
             </div>
 
-            <button className='add'>
+            <button
+              className='add'
+              onClick={() =>
+                dispatch(
+                  addToCart({
+                    id: data.id,
+                    title: data.attributes.title,
+                    desc: data.attributes.desc,
+                    price: data.attributes.price,
+                    img: data.attributes.img.data.attributes.url,
+                    quantity: quantity,
+                  })
+                )
+              }
+            >
               <AddShoppingCartIcon /> add to cart
             </button>
             <div className='links'>

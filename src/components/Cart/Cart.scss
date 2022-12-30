@@ -23,9 +23,10 @@
 
   .item {
     display: flex;
-    justify-content: space-between;
+    justify-content: stretch;
     align-items: flex-start;
     padding-bottom: 1rem;
+    gap: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     .details {
@@ -43,12 +44,17 @@
     }
 
     img {
-      width: 70px;
+      width: 80px;
+      object-fit: cover;
+      border: 1px solid #ccc;
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
     }
     .delete {
+      margin-left: auto;
       color: red;
       cursor: pointer;
       align-self: flex-end;
+      justify-self: flex-end;
     }
   }
 
